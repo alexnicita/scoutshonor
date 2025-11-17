@@ -1,0 +1,30 @@
+{
+  "candidate": {
+    "full_name": "Ada Lovelace",
+    "current_title": "CTO",
+    "titles": ["VP Engineering", "Head of Engineering"],
+    "years_experience": 14,
+    "skills": ["python", "aws", "fastapi", "kubernetes", "terraform"],
+    "domains": ["fintech", "ai"],
+    "locations": ["London", "Remote"],
+    "remote_preference": true,
+    "stage_preferences": ["series-a", "series-b"]
+  },
+  "startup": {
+    "name": "AcmeAI",
+    "stage": "series-a",
+    "domains": ["fintech", "ai"],
+    "location": "SF",
+    "stack": ["python", "aws"]
+  },
+  "role": {
+    "title": "VP Engineering",
+    "required_skills": ["python", "aws", "fastapi"],
+    "nice_to_have_skills": ["kubernetes"],
+    "min_years_experience": 8,
+    "responsibilities": ["team leadership", "hiring", "platform"],
+    "seniority": "vp",
+    "remote_ok": true
+  }
+}
+
