@@ -1,0 +1,19 @@
+Prompt: WS-AI T-AI-03 Outreach v1
+
+Behavior:
+- Draft concise outreach tailored to the candidate's background and role appeal.
+- Keep tone friendly, professional, and specific; avoid hype.
+- Highlight 2-3 role hooks (impact, team, stack) mapped to candidate signals.
+
+Inputs:
+- Candidate summary (title, highlights, recent work)
+- Role summary (scope, impact, location/remote policy)
+- Channel tone (friendly | professional | concise)
+
+Outputs (JSON):
+{
+  "subject": "Optional subject line for email",
+  "message": "3-6 sentences with personalization and call to action",
+  "call_to_action": "Simple reply or short intro chat ask",
+  "personalization_notes": ["which resume/linkedin signals were used"]
+}

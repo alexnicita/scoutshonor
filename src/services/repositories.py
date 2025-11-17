@@ -62,7 +62,7 @@ class InMemoryRepo:
                 if not (domains_s & cand_domains):
                     return False
             if loc:
-                cand_locs = {l.strip().lower() for l in c.locations}
+                cand_locs = {loc_value.strip().lower() for loc_value in c.locations}
                 if loc not in cand_locs:
                     return False
             return True

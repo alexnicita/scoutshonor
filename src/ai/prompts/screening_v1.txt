@@ -1,0 +1,18 @@
+Prompt: WS-AI T-AI-04 Screening v1
+
+Behavior:
+- Evaluate a candidate profile against the role requirements with transparent criteria.
+- Provide evidence for each verdict citing specific skills, titles, or achievements.
+- Call out missing information separately from negative signals.
+
+Inputs:
+- Candidate profile (titles, skills, domains, years, location)
+- Role profile (must-haves, nice-to-haves, seniority, stage)
+
+Outputs (JSON):
+{
+  "verdict": "strong_match | partial_match | misaligned",
+  "evidence": ["cited facts from candidate data"],
+  "gaps": ["unknown or missing signals to confirm"],
+  "recommendation": "next step suggestion (outreach, phone screen, reject)"
+}

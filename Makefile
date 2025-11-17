@@ -1,39 +1,40 @@
-# Simple, language-lean Makefile with script wrappers
+SHELL := /bin/bash
 
-.PHONY: help setup run test lint fmt
+.PHONY: help setup run test lint fmt migrate clean demo cron
 
 help:
 	@echo "Available targets:"
-	@echo "  make setup  - install deps / init env"
-	@echo "  make run    - run the primary app"
-	@echo "  make test   - run the test suite"
-	@echo "  make lint   - basic lint/sanity checks"
-	@echo "  make fmt    - format the codebase (noop if none)"
+	@echo "  setup   - install deps / init env"
+	@echo "  run     - run the primary app"
+	@echo "  test    - run the test suite"
+	@echo "  lint    - basic lint/sanity checks"
+	@echo "  fmt     - format the codebase (noop if none)"
+	@echo "  migrate - apply database migrations"
+	@echo "  clean   - remove caches and build output"
 
 setup:
-	bash scripts/setup-env.sh
+	bash scripts/setup.sh
 
 run:
-	bash scripts/run-server.sh
+	bash scripts/run.sh
 
 test:
-	bash scripts/run-tests.sh
+	bash scripts/test.sh
 
 lint:
-	@if command -v ruff >/dev/null 2>&1; then \
-		ruff check src tests; \
-	else \
-		echo "ruff not found; running basic syntax check"; \
-		python3 -m py_compile $(find src -name "*.py"); \
-	fi
+	bash scripts/lint.sh
 
 fmt:
-	bash scripts/format.sh
+	bash scripts/fmt.sh
 
-.PHONY: cron
+migrate:
+	bash scripts/migrate.sh
+
 cron:
 	bash scripts/run_digest.sh
 
-.PHONY: demo
 demo:
 	bash scripts/demo-e2e.sh
+
+clean:
+	bash scripts/clean.sh

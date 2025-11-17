@@ -13,6 +13,11 @@ __pycache__/
 .mypy_cache/
 .venv/
 .cache/
+.ruff_cache/
+dist/
+build/
+htmlcov/
 
 # Env files
 .env
+.env.local

@@ -11,7 +11,6 @@ Strategy:
 from __future__ import annotations
 
 import os
-from typing import Optional
 
 from ..models.descriptions import JobDescriptionInput, JobDescriptionResponse
 from .llm.base import LLMProvider, StubProvider
@@ -137,11 +136,19 @@ def _fallback_template(payload: JobDescriptionInput) -> str:
         f"This role is based in {loc}. We value outcomes over hours and create space for deep work. {overview_tail}",
     ]
 
+    what_you_bring = (
+        "\n\nWhat you'll bring\n\n- "
+        f"{payload.min_years_experience}+ years of relevant experience"
+    )
+    if req_bullets:
+        what_you_bring = f"{what_you_bring}\n{req_bullets}"
+    else:
+        what_you_bring = f"{what_you_bring}{req_bullets}"
+
     parts = [
-        f"Overview\n\n" + "\n\n".join(paragraphs),
+        "Overview\n\n" + "\n\n".join(paragraphs),
         f"\n\nWhat you'll do\n\n{resp_bullets}",
-        f"\n\nWhat you'll bring\n\n- {payload.min_years_experience}+ years of relevant experience" 
-        + ("\n" if req_bullets else "") + req_bullets,
+        what_you_bring,
     ]
     if nice_bullets:
         parts.append(f"\n\nNice to have\n\n{nice_bullets}")
@@ -167,4 +174,3 @@ def generate_description(payload: JobDescriptionInput) -> JobDescriptionResponse
         text = _fallback_template(payload)
     title = payload.title if payload.title else "Job Description"
     return JobDescriptionResponse(title=title, description=text)
-

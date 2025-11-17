@@ -1,0 +1,6 @@
+Avery Johnson
+Backend engineer with 8 years of experience leading API and data platform projects.
+Email: avery.johnson@example.com
+Phone: 415-555-1234
+Skills: Python, FastAPI, AWS, PostgreSQL, Docker
+Experience includes mentoring teams and hardening services for uptime.

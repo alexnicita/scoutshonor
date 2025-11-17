@@ -1,0 +1,6 @@
+{
+  "github": "\"Backend Engineer\" language:python language:aws language:kubernetes",
+  "google_xray": "site:linkedin.com/in \"Backend Engineer\" (\"python\" OR \"aws\" OR \"kubernetes\") \"fintech\" -intern",
+  "linkedin": "\"Backend Engineer\" AND (\"python\" OR \"aws\" OR \"kubernetes\") AND (\"Remote\" OR \"Austin\")",
+  "wellfound": "site:wellfound.com/u \"Backend Engineer\" (\"python\" OR \"aws\" OR \"kubernetes\") \"fintech\" (\"Remote\" OR \"Austin\")"
+}
