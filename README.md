@@ -37,12 +37,14 @@ Minimal, usable FastAPI service with Make targets, scripts, and tests.
 - `POST /candidates/`, `POST /candidates/bulk`, `GET /candidates/`, `GET /candidates/search`, `GET /candidates/{id}`
 - `POST /match` — rank candidates for a role
 - `POST /outreach` — generate outreach messages
+- `POST /descriptions/generate` — generate long job descriptions from minimal inputs
 - `POST /sourcing/boolean` — boolean/X-Ray search strings for a role
 
 Auto docs: visit `/docs` once the server is running.
 
 See `examples/recruiter_flow.md` for cURL examples and a step-by-step guide.
 See `examples/sourcing.md` for sourcing helpers.
+See `examples/descriptions.md` for job description generation.
 
 ## Contributing
 

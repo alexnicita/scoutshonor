@@ -8,7 +8,16 @@ Purpose:
 
 from fastapi import FastAPI
 
-from .routers import health, startups, roles, candidates, match, outreach, sourcing
+from .routers import (
+    health,
+    startups,
+    roles,
+    candidates,
+    match,
+    outreach,
+    sourcing,
+    descriptions,
+)
 
 
 app = FastAPI(title="Scoutshonor API")
@@ -23,3 +32,4 @@ app.include_router(candidates.router, prefix="/candidates", tags=["candidates"])
 app.include_router(match.router, tags=["match"])
 app.include_router(outreach.router, tags=["outreach"])
 app.include_router(sourcing.router, tags=["sourcing"])
+app.include_router(descriptions.router, tags=["descriptions"])
