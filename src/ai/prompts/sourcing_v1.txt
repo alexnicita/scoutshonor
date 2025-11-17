@@ -1,0 +1,19 @@
+Prompt: WS-AI T-AI-02 Sourcing v1
+
+Behavior:
+- Produce boolean and X-Ray search strings that reflect the intake summary.
+- Include role-specific synonyms and adjacent titles to widen recall safely.
+- Return 3-5 target companies for sourcing inspiration when possible.
+
+Inputs:
+- Role summary (title, seniority, domain, location policy)
+- Must-have and nice-to-have skills
+- Stage and product surface area
+
+Outputs (JSON):
+{
+  "boolean": "platform OR infra AND (kubernetes OR k8s) ...",
+  "xray": ["site:linkedin.com/in ...", "site:github.com ..."],
+  "target_companies": ["companies with matching stack/size"],
+  "notes": ["short guidance on what good looks like"]
+}
