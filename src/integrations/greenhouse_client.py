@@ -37,7 +37,10 @@ class GreenhouseClient:
         if not api_key:
             raise ValueError("Greenhouse API key is required")
         self.config = GreenhouseConfig(
-            api_key=api_key, base_url=base_url.rstrip("/"), page_size=page_size, timeout=timeout
+            api_key=api_key,
+            base_url=base_url.rstrip("/"),
+            page_size=page_size,
+            timeout=timeout,
         )
         self.client = httpx.Client(
             base_url=self.config.base_url,
@@ -61,21 +64,27 @@ class GreenhouseClient:
         raw = self._paginate("/jobs", params=params)
         return [self._normalize_job(j) for j in raw]
 
-    def list_candidates(self, created_after: Optional[str] = None) -> List[Dict[str, Any]]:
+    def list_candidates(
+        self, created_after: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
         params: Dict[str, Any] = {"per_page": self.config.page_size}
         if created_after:
             params["created_after"] = created_after
         raw = self._paginate("/candidates", params=params)
         return [self._normalize_candidate(c) for c in raw]
 
-    def list_applications(self, candidate_id: Optional[int] = None) -> List[Dict[str, Any]]:
+    def list_applications(
+        self, candidate_id: Optional[int] = None
+    ) -> List[Dict[str, Any]]:
         params: Dict[str, Any] = {"per_page": self.config.page_size}
         if candidate_id:
             params["candidate_id"] = candidate_id
         raw = self._paginate("/applications", params=params)
         return [self._normalize_application(a) for a in raw]
 
-    def _paginate(self, path: str, params: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+    def _paginate(
+        self, path: str, params: Optional[Dict[str, Any]] = None
+    ) -> List[Dict[str, Any]]:
         url: Optional[str] = path
         collected: List[Dict[str, Any]] = []
         params = dict(params or {})
@@ -89,7 +98,9 @@ class GreenhouseClient:
             if not isinstance(payload, list):
                 raise ValueError(f"Unexpected payload for {url}")
             collected.extend(payload)
-            next_link = response.links.get("next", {}).get("url") or self._extract_next_link(response.headers)
+            next_link = response.links.get("next", {}).get(
+                "url"
+            ) or self._extract_next_link(response.headers)
             url = next_link
             params = None
         return collected
@@ -143,7 +154,9 @@ class GreenhouseClient:
         job_ids: List[int] = []
         candidate_id = app.get("candidate_id")
         if "jobs" in app:
-            job_ids = [j.get("id") for j in app.get("jobs", []) if j.get("id") is not None]
+            job_ids = [
+                j.get("id") for j in app.get("jobs", []) if j.get("id") is not None
+            ]
         elif app.get("job_id") is not None:
             job_ids = [app["job_id"]]
         source = None
@@ -153,7 +166,9 @@ class GreenhouseClient:
             "id": app.get("id"),
             "candidate_id": candidate_id,
             "job_ids": job_ids,
-            "stage": (app.get("stage") or {}).get("name") if isinstance(app.get("stage"), dict) else app.get("stage"),
+            "stage": (app.get("stage") or {}).get("name")
+            if isinstance(app.get("stage"), dict)
+            else app.get("stage"),
             "source": source,
         }
 

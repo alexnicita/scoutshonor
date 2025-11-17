@@ -59,7 +59,10 @@ def test_reply_router_defaults_and_metrics():
         routed_events.append((name, data))
 
     router = ReplyRouter(
-        ownership_index={"cand-123": "ae@scoutshonor.ai", "default": "ops@scoutshonor.ai"},
+        ownership_index={
+            "cand-123": "ae@scoutshonor.ai",
+            "default": "ops@scoutshonor.ai",
+        },
         metrics_hook=metrics,
     )
     payload = router.route(

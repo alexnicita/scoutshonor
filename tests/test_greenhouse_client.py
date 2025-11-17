@@ -26,7 +26,9 @@ def greenhouse_transport() -> httpx.MockTransport:
         if path.endswith("/jobs") and query_params.get("page") == "2":
             return httpx.Response(200, json=jobs_page2)
         if path.endswith("/jobs"):
-            headers = {"Link": '<https://harvest.greenhouse.io/v1/jobs?page=2>; rel="next"'}
+            headers = {
+                "Link": '<https://harvest.greenhouse.io/v1/jobs?page=2>; rel="next"'
+            }
             return httpx.Response(200, json=jobs_page1, headers=headers)
         if path.endswith("/candidates"):
             return httpx.Response(200, json=candidates)
@@ -38,7 +40,9 @@ def greenhouse_transport() -> httpx.MockTransport:
 
 
 def test_greenhouse_client_paginates_and_normalizes():
-    client = GreenhouseClient(api_key="secret", transport=greenhouse_transport(), page_size=2)
+    client = GreenhouseClient(
+        api_key="secret", transport=greenhouse_transport(), page_size=2
+    )
     jobs = client.list_jobs()
     assert len(jobs) == 3
     assert jobs[0]["departments"] == ["Engineering"]

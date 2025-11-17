@@ -33,7 +33,9 @@ class SummaryResponse(BaseModel):
 
 
 def _build_prompt(chunks: List[SummaryChunk], instruction: str | None = None) -> str:
-    base_instruction = instruction or "Summarize candidate signals and risks as bullet points."
+    base_instruction = (
+        instruction or "Summarize candidate signals and risks as bullet points."
+    )
     lines = [base_instruction, "", "Context:"]
     for chunk in chunks:
         lines.append(f"- [{chunk.source}] ({chunk.id}): {chunk.text}")
@@ -61,11 +63,12 @@ class Summarizer:
         prompt = _build_prompt(chunks, instruction)
         output = self.provider.complete(prompt)
         combined_sources = sorted({chunk.source for chunk in chunks})
-        token_estimate = sum(_estimate_tokens(chunk.text) for chunk in chunks) + _estimate_tokens(output)
+        token_estimate = sum(
+            _estimate_tokens(chunk.text) for chunk in chunks
+        ) + _estimate_tokens(output)
         return SummaryResponse(
             summary=output.strip(),
             combined_sources=combined_sources,
             token_estimate=token_estimate,
             provider=self.provider.name,
         )
-

@@ -53,7 +53,9 @@ class GmailPoller:
         params = {"labelIds": self.label, "maxResults": max_results}
         if query:
             params["q"] = query
-        response = self.http_client.get(f"{self.api_base}/users/me/messages", params=params, headers=headers)
+        response = self.http_client.get(
+            f"{self.api_base}/users/me/messages", params=params, headers=headers
+        )
         response.raise_for_status()
         messages = response.json().get("messages", [])
 
@@ -67,17 +69,32 @@ class GmailPoller:
                     self.suppression.suppress(addr, reason="bounce")
         return events
 
-    def _fetch_message(self, message_id: str, headers: Dict[str, str]) -> Dict[str, object]:
+    def _fetch_message(
+        self, message_id: str, headers: Dict[str, str]
+    ) -> Dict[str, object]:
         resp = self.http_client.get(
             f"{self.api_base}/users/me/messages/{message_id}",
-            params={"format": "metadata", "metadataHeaders": ["Subject", "From", "To", "Cc", "Bcc", "Auto-Submitted"]},
+            params={
+                "format": "metadata",
+                "metadataHeaders": [
+                    "Subject",
+                    "From",
+                    "To",
+                    "Cc",
+                    "Bcc",
+                    "Auto-Submitted",
+                ],
+            },
             headers=headers,
         )
         resp.raise_for_status()
         return resp.json()
 
     def _classify_message(self, message: Dict[str, object]) -> InteractionEvent:
-        headers = {h["name"].lower(): h["value"] for h in message.get("payload", {}).get("headers", [])}
+        headers = {
+            h["name"].lower(): h["value"]
+            for h in message.get("payload", {}).get("headers", [])
+        }
         snippet = message.get("snippet", "")
         addresses = self._addresses_from_headers(headers)
         if self._is_bounce(headers, snippet):

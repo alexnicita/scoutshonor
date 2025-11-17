@@ -63,7 +63,11 @@ class IntakeForm(BaseModel):
     scorecard: List[ScorecardCompetency] = Field(default_factory=list)
 
     @field_validator(
-        "goals", "must_have_skills", "nice_to_have_skills", "responsibilities", mode="before"
+        "goals",
+        "must_have_skills",
+        "nice_to_have_skills",
+        "responsibilities",
+        mode="before",
     )
     def _strip_blanks(cls, values: Iterable[str]) -> List[str]:
         if values is None:

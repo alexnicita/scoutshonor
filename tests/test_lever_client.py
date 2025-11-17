@@ -16,10 +16,20 @@ def test_lever_client_normalizes_payloads():
     }
     candidates_payload = {
         "data": [
-            {"id": "c1", "name": "Taylor", "headline": "IC", "emails": ["taylor@example.com"], "stage": "screen"}
+            {
+                "id": "c1",
+                "name": "Taylor",
+                "headline": "IC",
+                "emails": ["taylor@example.com"],
+                "stage": "screen",
+            }
         ]
     }
-    applications_payload = {"data": [{"id": "a1", "opportunityId": "opp-1", "posting": "p1", "stage": "new"}]}
+    applications_payload = {
+        "data": [
+            {"id": "a1", "opportunityId": "opp-1", "posting": "p1", "stage": "new"}
+        ]
+    }
 
     def handler(request: httpx.Request) -> httpx.Response:
         if request.url.path.endswith("/postings"):

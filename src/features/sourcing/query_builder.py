@@ -27,8 +27,8 @@ def _or_clause(values: List[str]) -> str:
     if not values:
         return ""
     if len(values) == 1:
-        return f"\"{values[0]}\""
-    return "(" + " OR ".join(f"\"{v}\"" for v in values) + ")"
+        return f'"{values[0]}"'
+    return "(" + " OR ".join(f'"{v}"' for v in values) + ")"
 
 
 def build_queries(profile: SearchProfile) -> Dict[str, str]:
@@ -44,7 +44,7 @@ def build_queries(profile: SearchProfile) -> Dict[str, str]:
     industry_clause = _or_clause(industries)
     exclude_clause = " ".join(f"-{term}" for term in excludes) if excludes else ""
 
-    linkedin_parts = [f"\"{title}\""]
+    linkedin_parts = [f'"{title}"']
     if skills_clause:
         linkedin_parts.append(skills_clause)
     if loc_clause:
@@ -53,7 +53,7 @@ def build_queries(profile: SearchProfile) -> Dict[str, str]:
 
     google_parts = [
         "site:linkedin.com/in",
-        f"\"{title}\"",
+        f'"{title}"',
         skills_clause,
         industry_clause,
         exclude_clause,
@@ -62,14 +62,14 @@ def build_queries(profile: SearchProfile) -> Dict[str, str]:
 
     wellfound_parts = [
         "site:wellfound.com/u",
-        f"\"{title}\"",
+        f'"{title}"',
         skills_clause,
         industry_clause,
         loc_clause,
     ]
     wellfound_query = " ".join([part for part in wellfound_parts if part]).strip()
 
-    github_parts = [f"\"{title}\""] + [f"language:{skill}" for skill in skills[:3]]
+    github_parts = [f'"{title}"'] + [f"language:{skill}" for skill in skills[:3]]
     github_query = " ".join(github_parts)
 
     return {

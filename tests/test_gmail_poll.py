@@ -25,7 +25,11 @@ def make_auth(tmp_path) -> GmailAuth:
         expires_at=datetime.now(timezone.utc) + timedelta(hours=1),
     )
     store.save(token)
-    client = httpx.Client(transport=httpx.MockTransport(lambda request: httpx.Response(200, json=token.to_dict())))
+    client = httpx.Client(
+        transport=httpx.MockTransport(
+            lambda request: httpx.Response(200, json=token.to_dict())
+        )
+    )
     return GmailAuth(
         client_id="client-id",
         client_secret="client-secret",
@@ -62,7 +66,9 @@ def test_gmail_poller_detects_events_and_updates_suppression(tmp_path):
             return httpx.Response(200, json=payload)
         return httpx.Response(404)
 
-    poller = GmailPoller(auth=auth, http_client=httpx.Client(transport=httpx.MockTransport(handler)))
+    poller = GmailPoller(
+        auth=auth, http_client=httpx.Client(transport=httpx.MockTransport(handler))
+    )
     events = poller.poll()
 
     event_types = {evt.event for evt in events}

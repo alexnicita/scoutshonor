@@ -14,7 +14,9 @@ class RiskSummary(BaseModel):
     risks: List[str] = Field(default_factory=list)
 
 
-def summarize_candidate(profile: ResumeProfile, required_skills: List[str]) -> RiskSummary:
+def summarize_candidate(
+    profile: ResumeProfile, required_skills: List[str]
+) -> RiskSummary:
     """Build a condensed summary and risk list from parsed data."""
 
     missing_skills = {

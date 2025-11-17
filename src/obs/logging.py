@@ -59,7 +59,9 @@ class StructuredLogger(logging.LoggerAdapter):
             payload: Dict[str, Any] = {"event": msg, **context}
             msg = json.dumps(payload, default=str)
         elif context:
-            kv_pairs = " ".join(f"{key}={_stringify(val)}" for key, val in context.items())
+            kv_pairs = " ".join(
+                f"{key}={_stringify(val)}" for key, val in context.items()
+            )
             msg = f"{msg} | {kv_pairs}"
 
         kwargs.setdefault("stacklevel", 2)

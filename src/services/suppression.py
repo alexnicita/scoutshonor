@@ -27,7 +27,11 @@ class SuppressionStore:
     def suppress(self, email: str, reason: str = "manual") -> None:
         normalized = self._normalize(email)
         self._suppressed.add(normalized)
-        self.audit_log.append(SuppressionEvent(email=normalized, reason=reason, timestamp=datetime.now(timezone.utc)))
+        self.audit_log.append(
+            SuppressionEvent(
+                email=normalized, reason=reason, timestamp=datetime.now(timezone.utc)
+            )
+        )
 
     def is_suppressed(self, email: str) -> bool:
         return self._normalize(email) in self._suppressed

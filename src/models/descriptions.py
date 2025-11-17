@@ -41,4 +41,3 @@ class JobDescriptionInput(BaseModel):
 class JobDescriptionResponse(BaseModel):
     title: str
     description: str
-

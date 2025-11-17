@@ -7,7 +7,9 @@ from src.integrations.greenhouse_writer import GreenhouseWriter
 
 def test_greenhouse_writer_dry_run_includes_payload():
     writer = GreenhouseWriter(api_key="secret", dry_run=True)
-    result = writer.post_application_note(application_id=99, body="Syncing note", visibility="public")
+    result = writer.post_application_note(
+        application_id=99, body="Syncing note", visibility="public"
+    )
     assert result["dry_run"] is True
     assert result["path"].endswith("/applications/99/activity_feed/notes")
     assert result["payload"]["body"] == "Syncing note"

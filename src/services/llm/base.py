@@ -28,4 +28,3 @@ class StubProvider(LLMProvider):
         body = prompt.strip()
         parts = [p for p in [header, body] if p]
         return "\n\n".join(parts)
-

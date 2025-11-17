@@ -44,12 +44,10 @@ def cosine_similarity(a: List[float], b: List[float]) -> float:
     return _dot(a, b) / denom
 
 
-def batch_cosine_similarity(queries: List[List[float]], docs: List[List[float]]) -> List[List[float]]:
+def batch_cosine_similarity(
+    queries: List[List[float]], docs: List[List[float]]
+) -> List[List[float]]:
     """Compute pairwise cosine similarities for two embedding sets."""
     normalized_queries = [normalize(q) for q in queries]
     normalized_docs = [normalize(d) for d in docs]
-    return [
-        [_dot(q, d) for d in normalized_docs]
-        for q in normalized_queries
-    ]
-
+    return [[_dot(q, d) for d in normalized_docs] for q in normalized_queries]

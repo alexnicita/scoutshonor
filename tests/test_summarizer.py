@@ -15,8 +15,12 @@ class MockProvider:
 def test_summarizer_returns_schema_and_tracks_prompt():
     provider = MockProvider("Condensed summary.")
     chunks = [
-        SummaryChunk(id="c1", text="Senior engineer with platform leadership.", source="resume"),
-        SummaryChunk(id="c2", text="Interested in remote-first startups.", source="intake"),
+        SummaryChunk(
+            id="c1", text="Senior engineer with platform leadership.", source="resume"
+        ),
+        SummaryChunk(
+            id="c2", text="Interested in remote-first startups.", source="intake"
+        ),
     ]
     summarizer = Summarizer(provider)
 
@@ -40,4 +44,3 @@ def test_summarizer_requires_content():
         assert "no content" in str(exc)
     else:
         raise AssertionError("expected summarizer to reject empty input")
-

@@ -41,9 +41,8 @@ def _build_prompt(payload: JobDescriptionInput) -> tuple[str, str]:
         return ", ".join(sorted({x.strip() for x in items if x}))
 
     # Compose a compact but information-rich prompt
-    company_line = (
-        f"Company: {payload.startup_name or 'A startup'}"
-        + (f" | Stage: {payload.stage.value}" if payload.stage else "")
+    company_line = f"Company: {payload.startup_name or 'A startup'}" + (
+        f" | Stage: {payload.stage.value}" if payload.stage else ""
     )
     role_line = (
         f"Role: {payload.title} ({payload.seniority.value})"
@@ -60,11 +59,21 @@ def _build_prompt(payload: JobDescriptionInput) -> tuple[str, str]:
         scope.append(f"Team: {payload.team_description}")
 
     details = [
-        f"Required skills: {j(payload.required_skills)}" if payload.required_skills else None,
-        f"Nice-to-have: {j(payload.nice_to_have_skills)}" if payload.nice_to_have_skills else None,
-        f"Responsibilities: {j(payload.responsibilities)}" if payload.responsibilities else None,
-        f"Minimum experience: {payload.min_years_experience}+ years" if payload.min_years_experience else None,
-        f"Compensation: {payload.compensation_range}" if payload.compensation_range else None,
+        f"Required skills: {j(payload.required_skills)}"
+        if payload.required_skills
+        else None,
+        f"Nice-to-have: {j(payload.nice_to_have_skills)}"
+        if payload.nice_to_have_skills
+        else None,
+        f"Responsibilities: {j(payload.responsibilities)}"
+        if payload.responsibilities
+        else None,
+        f"Minimum experience: {payload.min_years_experience}+ years"
+        if payload.min_years_experience
+        else None,
+        f"Compensation: {payload.compensation_range}"
+        if payload.compensation_range
+        else None,
         f"Benefits: {j(payload.benefits)}" if payload.benefits else None,
     ]
     detail_lines = "\n".join([d for d in details if d])
@@ -83,7 +92,7 @@ def _build_prompt(payload: JobDescriptionInput) -> tuple[str, str]:
         "\n- Be inclusive and avoid gendered language"
         "\n- Prefer clear, concrete phrasing over buzzwords"
         "\n- Tailor to the seniority level and stage"
-        "\n- Use the details below to anchor specifics\n\n" 
+        "\n- Use the details below to anchor specifics\n\n"
         f"Details:\n{detail_lines}\n"
     )
     return system, prompt
@@ -105,7 +114,10 @@ def _fallback_template(payload: JobDescriptionInput) -> str:
         "Strong technical fundamentals relevant to the role",
     )
     nice_bullets = (
-        "\n" + bullets(payload.nice_to_have_skills, "Bonus experience that accelerates impact")
+        "\n"
+        + bullets(
+            payload.nice_to_have_skills, "Bonus experience that accelerates impact"
+        )
         if payload.nice_to_have_skills
         else ""
     )

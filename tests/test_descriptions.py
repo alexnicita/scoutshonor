@@ -34,4 +34,3 @@ def test_generate_description_stub_returns_long_text():
     assert "What you'll do" in text
     assert "What you'll bring" in text
     assert len(text.splitlines()) > 10
-

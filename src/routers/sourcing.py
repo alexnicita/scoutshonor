@@ -26,4 +26,3 @@ def post_boolean(payload: BooleanRequest) -> BooleanResponse:
         role=role, locations=payload.locations, extras=payload.extras
     )
     return BooleanResponse(**strings)
-

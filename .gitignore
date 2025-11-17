@@ -21,3 +21,17 @@ htmlcov/
 # Env files
 .env
 .env.local
+
+# Data and logs
+data/
+!data/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+*.log
+logs/
+tmp/
+
+# Coverage artifacts
+.coverage.*
+coverage.xml

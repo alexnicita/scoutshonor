@@ -10,7 +10,11 @@ def test_slack_app_dry_run_posts_message():
 
 def test_slash_commands_return_responses():
     app = SlackApp(bot_token="xoxb-test", dry_run=True)
-    resp = app.handle_slash_command(action="draft-outreach", text="backend role", user_id="U1", channel_id="C1")
+    resp = app.handle_slash_command(
+        action="draft-outreach", text="backend role", user_id="U1", channel_id="C1"
+    )
     assert "outreach" in resp.text
-    resp2 = app.handle_slash_command(action="who-is-stuck", text="", user_id="U1", channel_id="C1")
+    resp2 = app.handle_slash_command(
+        action="who-is-stuck", text="", user_id="U1", channel_id="C1"
+    )
     assert "Roles in-flight" in resp2.text

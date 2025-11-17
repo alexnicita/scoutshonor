@@ -239,7 +239,9 @@ class DataStore:
         return self.get_role(role_id) or {}
 
     def get_role(self, role_id: str) -> Optional[Dict[str, Any]]:
-        row = self.conn.execute("SELECT * FROM roles WHERE id = ?", (role_id,)).fetchone()
+        row = self.conn.execute(
+            "SELECT * FROM roles WHERE id = ?", (role_id,)
+        ).fetchone()
         if not row:
             return None
         return {
@@ -267,7 +269,9 @@ class DataStore:
             rows = self.conn.execute("SELECT * FROM roles").fetchall()
         return [self.get_role(row["id"]) or {} for row in rows]
 
-    def update_role(self, role_id: str, updates: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def update_role(
+        self, role_id: str, updates: Dict[str, Any]
+    ) -> Optional[Dict[str, Any]]:
         fields = []
         values: List[Any] = []
         mapping = {
@@ -293,9 +297,7 @@ class DataStore:
         if not fields:
             return self.get_role(role_id)
         values.append(role_id)
-        self.conn.execute(
-            f"UPDATE roles SET {', '.join(fields)} WHERE id = ?", values
-        )
+        self.conn.execute(f"UPDATE roles SET {', '.join(fields)} WHERE id = ?", values)
         self.conn.commit()
         return self.get_role(role_id)
 
@@ -396,7 +398,9 @@ class DataStore:
         if not candidate:
             raise ValueError("candidate not found")
 
-        contact = (payload.get("metadata") or {}).get("contact") or candidate.get("email")
+        contact = (payload.get("metadata") or {}).get("contact") or candidate.get(
+            "email"
+        )
         if contact and self.is_suppressed(contact):
             self.record_audit_event(
                 event_type="interaction_blocked",
@@ -453,7 +457,9 @@ class DataStore:
             "occurred_at": row["occurred_at"],
         }
 
-    def list_interactions(self, candidate_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    def list_interactions(
+        self, candidate_id: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
         if candidate_id:
             rows = self.conn.execute(
                 "SELECT * FROM interactions WHERE candidate_id = ? ORDER BY occurred_at",
@@ -555,7 +561,9 @@ class DataStore:
         return [self.get_stage_event(row["id"]) or {} for row in rows]
 
     # --- suppression and consent scaffolding ---
-    def suppress_contact(self, contact: str, reason: str | None = None, source: str | None = None) -> None:
+    def suppress_contact(
+        self, contact: str, reason: str | None = None, source: str | None = None
+    ) -> None:
         now = _now()
         self.conn.execute(
             """
@@ -593,7 +601,15 @@ class DataStore:
             INSERT INTO consent_events (id, contact, candidate_id, status, source, notes, recorded_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
-            (event_id, contact.lower(), candidate_id, status, source, notes, recorded_at),
+            (
+                event_id,
+                contact.lower(),
+                candidate_id,
+                status,
+                source,
+                notes,
+                recorded_at,
+            ),
         )
         self.conn.commit()
         return self.get_consent_event(event_id) or {}
@@ -615,7 +631,11 @@ class DataStore:
         }
 
     def record_audit_event(
-        self, *, event_type: str, subject_id: Optional[str], detail: Optional[Dict[str, Any]]
+        self,
+        *,
+        event_type: str,
+        subject_id: Optional[str],
+        detail: Optional[Dict[str, Any]],
     ) -> Dict[str, Any]:
         audit_id = str(uuid4())
         created_at = _now()
@@ -643,7 +663,9 @@ class DataStore:
             "created_at": row["created_at"],
         }
 
-    def list_audit_events(self, event_type: Optional[str] = None) -> List[Dict[str, Any]]:
+    def list_audit_events(
+        self, event_type: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
         if event_type:
             rows = self.conn.execute(
                 "SELECT * FROM audit_logs WHERE event_type = ? ORDER BY created_at DESC",

@@ -25,7 +25,9 @@ class GmailToken:
     token_type: str = "Bearer"
 
     def is_expired(self, skew_seconds: int = 60) -> bool:
-        return datetime.now(timezone.utc) >= self.expires_at - timedelta(seconds=skew_seconds)
+        return datetime.now(timezone.utc) >= self.expires_at - timedelta(
+            seconds=skew_seconds
+        )
 
     def to_dict(self) -> Dict[str, str]:
         return {
@@ -147,5 +149,12 @@ class GmailAuth:
         client_secret = os.environ.get("GMAIL_CLIENT_SECRET")
         redirect_uri = os.environ.get("GMAIL_REDIRECT_URI", "urn:ietf:wg:oauth:2.0:oob")
         if not client_id or not client_secret:
-            raise RuntimeError("Set GMAIL_CLIENT_ID and GMAIL_CLIENT_SECRET before initializing GmailAuth.")
-        return cls(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, token_store=token_store)
+            raise RuntimeError(
+                "Set GMAIL_CLIENT_ID and GMAIL_CLIENT_SECRET before initializing GmailAuth."
+            )
+        return cls(
+            client_id=client_id,
+            client_secret=client_secret,
+            redirect_uri=redirect_uri,
+            token_store=token_store,
+        )

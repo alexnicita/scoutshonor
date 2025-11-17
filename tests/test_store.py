@@ -61,7 +61,9 @@ def test_role_and_scorecard_flows(store: DataStore) -> None:
 def test_sequences_stage_events_and_sources(store: DataStore) -> None:
     startup = store.create_startup({"name": "Beta", "stage": "series-a"})
     role = store.create_role({"startup_id": startup["id"], "title": "Designer"})
-    candidate = store.create_candidate({"full_name": "Jamie Smith", "email": "jamie@example.com"})
+    candidate = store.create_candidate(
+        {"full_name": "Jamie Smith", "email": "jamie@example.com"}
+    )
 
     sequence = store.create_sequence(
         {
@@ -92,7 +94,9 @@ def test_sequences_stage_events_and_sources(store: DataStore) -> None:
 
 
 def test_suppression_blocks_interactions(store: DataStore) -> None:
-    candidate = store.create_candidate({"full_name": "Opt Out", "email": "optout@example.com"})
+    candidate = store.create_candidate(
+        {"full_name": "Opt Out", "email": "optout@example.com"}
+    )
     store.suppress_contact(candidate["email"], reason="user_opt_out", source="test")
 
     with pytest.raises(PermissionError):

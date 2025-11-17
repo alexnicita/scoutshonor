@@ -72,9 +72,7 @@ def apply_migrations(
 
         sql = migration.read_text(encoding="utf-8")
         conn.executescript(sql)
-        conn.execute(
-            "INSERT INTO schema_migrations(version) VALUES (?)", (version,)
-        )
+        conn.execute("INSERT INTO schema_migrations(version) VALUES (?)", (version,))
         conn.commit()
 
     if connection is None:

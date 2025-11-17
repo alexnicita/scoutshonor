@@ -21,7 +21,9 @@ class GreenhouseWriter:
         if not api_key:
             raise ValueError("Greenhouse API key is required")
         self.dry_run = dry_run
-        self.config = GreenhouseConfig(api_key=api_key, base_url=base_url.rstrip("/"), timeout=timeout)
+        self.config = GreenhouseConfig(
+            api_key=api_key, base_url=base_url.rstrip("/"), timeout=timeout
+        )
         self.client = httpx.Client(
             base_url=self.config.base_url,
             auth=httpx.BasicAuth(api_key, ""),

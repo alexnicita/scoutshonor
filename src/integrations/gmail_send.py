@@ -96,6 +96,8 @@ class GmailSender:
 
         token = self.auth.get_token()
         headers = {"Authorization": f"{token.token_type} {token.access_token}"}
-        response = self.http_client.post(f"{self.api_base}/users/me/messages/send", json=payload, headers=headers)
+        response = self.http_client.post(
+            f"{self.api_base}/users/me/messages/send", json=payload, headers=headers
+        )
         response.raise_for_status()
         return response.json()

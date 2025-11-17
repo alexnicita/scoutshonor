@@ -76,4 +76,3 @@ def rank_documents(
     if top_k is not None:
         return results[:top_k]
     return results
-

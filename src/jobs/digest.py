@@ -24,11 +24,15 @@ def build_digest(stale_days: int = 5) -> str:
         lines.append("")
         lines.append("Role summary:")
         for role in roles:
-            lines.append(f"- {role.title} (startup {role.startup_id}) — required skills: {', '.join(role.required_skills) or 'n/a'}")
+            lines.append(
+                f"- {role.title} (startup {role.startup_id}) — required skills: {', '.join(role.required_skills) or 'n/a'}"
+            )
     return "\n".join(lines)
 
 
-def run_digest(slack_channel: Optional[str] = None, slack_bot_token: Optional[str] = None) -> str:
+def run_digest(
+    slack_channel: Optional[str] = None, slack_bot_token: Optional[str] = None
+) -> str:
     digest_text = build_digest()
     print(digest_text)
     if slack_channel and slack_bot_token:
@@ -40,4 +44,7 @@ def run_digest(slack_channel: Optional[str] = None, slack_bot_token: Optional[st
 if __name__ == "__main__":
     import os
 
-    run_digest(slack_channel=os.environ.get("SLACK_CHANNEL_ID"), slack_bot_token=os.environ.get("SLACK_BOT_TOKEN"))
+    run_digest(
+        slack_channel=os.environ.get("SLACK_CHANNEL_ID"),
+        slack_bot_token=os.environ.get("SLACK_BOT_TOKEN"),
+    )

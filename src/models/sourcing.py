@@ -17,4 +17,3 @@ class BooleanResponse(BaseModel):
     linkedin: str
     google_xray: str
     github: str
-

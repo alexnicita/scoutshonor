@@ -20,22 +20,6 @@ def list_candidates() -> List[Candidate]:
     return repo.list_candidates()
 
 
-@router.get("/{candidate_id}", response_model=Candidate)
-def get_candidate(candidate_id: str) -> Candidate:
-    c = repo.get_candidate(candidate_id)
-    if not c:
-        raise HTTPException(status_code=404, detail="Candidate not found")
-    return c
-
-
-@router.post("/bulk", response_model=List[Candidate])
-def bulk_create(candidates: List[CandidateCreate]) -> List[Candidate]:
-    created: List[Candidate] = []
-    for payload in candidates:
-        created.append(repo.create_candidate(payload))
-    return created
-
-
 @router.get("/search", response_model=List[Candidate])
 def search_candidates(
     skills: Optional[str] = Query(None, description="Comma-separated skills"),
@@ -52,3 +36,19 @@ def search_candidates(
         domains=split_csv(domains),
         location=location,
     )
+
+
+@router.get("/{candidate_id}", response_model=Candidate)
+def get_candidate(candidate_id: str) -> Candidate:
+    c = repo.get_candidate(candidate_id)
+    if not c:
+        raise HTTPException(status_code=404, detail="Candidate not found")
+    return c
+
+
+@router.post("/bulk", response_model=List[Candidate])
+def bulk_create(candidates: List[CandidateCreate]) -> List[Candidate]:
+    created: List[Candidate] = []
+    for payload in candidates:
+        created.append(repo.create_candidate(payload))
+    return created

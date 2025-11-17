@@ -18,7 +18,11 @@ def make_auth(tmp_path) -> GmailAuth:
     )
     store.save(token)
     # Mock client to avoid outbound calls on refresh.
-    client = httpx.Client(transport=httpx.MockTransport(lambda request: httpx.Response(200, json=token.to_dict())))
+    client = httpx.Client(
+        transport=httpx.MockTransport(
+            lambda request: httpx.Response(200, json=token.to_dict())
+        )
+    )
     return GmailAuth(
         client_id="client-id",
         client_secret="client-secret",
@@ -70,5 +74,7 @@ def test_send_email_hits_gmail_api(tmp_path):
         dry_run=False,
         http_client=httpx.Client(transport=httpx.MockTransport(handler)),
     )
-    resp = sender.send_email(to="candidate@example.com", subject="Hi", body_text="hello")
+    resp = sender.send_email(
+        to="candidate@example.com", subject="Hi", body_text="hello"
+    )
     assert resp["id"] == "abc123"

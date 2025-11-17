@@ -47,10 +47,5 @@ class OpenAIProvider(LLMProvider):
             resp = client.post(url, headers=headers, json=payload)
             resp.raise_for_status()
             data = resp.json()
-            content = (
-                data.get("choices", [{}])[0]
-                .get("message", {})
-                .get("content", "")
-            )
+            content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
         return content or ""
-

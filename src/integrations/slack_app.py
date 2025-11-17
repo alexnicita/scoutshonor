@@ -17,7 +17,10 @@ class SlashCommandResult:
     blocks: Optional[List[Dict[str, object]]] = None
 
     def to_dict(self) -> Dict[str, object]:
-        payload: Dict[str, object] = {"text": self.text, "response_type": self.response_type}
+        payload: Dict[str, object] = {
+            "text": self.text,
+            "response_type": self.response_type,
+        }
         if self.blocks:
             payload["blocks"] = self.blocks
         return payload
@@ -40,7 +43,9 @@ class SlackApp:
         self.dry_run = dry_run
         self.http_client = http_client or httpx.Client(timeout=10.0)
 
-    def post_message(self, channel: str, text: str, blocks: Optional[List[Dict[str, object]]] = None) -> Dict[str, object]:
+    def post_message(
+        self, channel: str, text: str, blocks: Optional[List[Dict[str, object]]] = None
+    ) -> Dict[str, object]:
         payload: Dict[str, object] = {"channel": channel, "text": text}
         if blocks:
             payload["blocks"] = blocks
@@ -55,7 +60,9 @@ class SlackApp:
         resp.raise_for_status()
         return resp.json()
 
-    def handle_slash_command(self, action: str, text: str, user_id: str, channel_id: str) -> SlashCommandResult:
+    def handle_slash_command(
+        self, action: str, text: str, user_id: str, channel_id: str
+    ) -> SlashCommandResult:
         action = (action or "").strip()
         if not action:
             # Assume first token of text is the action for `/recruit <action> ...`
@@ -70,7 +77,9 @@ class SlackApp:
         if action in ("who-is-stuck", "stuck"):
             return self._who_is_stuck()
 
-        return SlashCommandResult(text=f"Unknown command `{action}`. Try draft-outreach, add-note, or who-is-stuck.")
+        return SlashCommandResult(
+            text=f"Unknown command `{action}`. Try draft-outreach, add-note, or who-is-stuck."
+        )
 
     def _draft_outreach(self, text: str, user_id: str) -> SlashCommandResult:
         prompt = text or "role: <title> | candidate: <name>"
@@ -100,4 +109,7 @@ class SlackApp:
         return SlashCommandResult(text="\n".join(body_lines))
 
     def _headers(self) -> Dict[str, str]:
-        return {"Authorization": f"Bearer {self.bot_token}", "Content-Type": "application/json; charset=utf-8"}
+        return {
+            "Authorization": f"Bearer {self.bot_token}",
+            "Content-Type": "application/json; charset=utf-8",
+        }

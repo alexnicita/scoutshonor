@@ -16,7 +16,9 @@ class StaticEmbedder:
 def test_rank_documents_returns_scores_and_evidence():
     embedder = StaticEmbedder()
     documents = [
-        Document(id="d1", text="experience building platforms", metadata={"source": "resume"}),
+        Document(
+            id="d1", text="experience building platforms", metadata={"source": "resume"}
+        ),
         Document(id="d2", text="marketing background", metadata={"source": "social"}),
     ]
 

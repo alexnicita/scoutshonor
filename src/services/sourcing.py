@@ -104,4 +104,3 @@ def build_boolean_strings(
         "google_xray": google_xray,
         "github": gh_query,
     }
-

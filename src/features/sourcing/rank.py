@@ -60,7 +60,9 @@ def rank_candidates(
             evidence[competency.name] = hits
             total_score += comp_score * weight
         ranked.append(
-            RankedCandidate(candidate=candidate, score=round(total_score, 4), evidence=evidence)
+            RankedCandidate(
+                candidate=candidate, score=round(total_score, 4), evidence=evidence
+            )
         )
 
     ranked.sort(key=lambda item: item.score, reverse=True)
