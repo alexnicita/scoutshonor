@@ -11,9 +11,6 @@ if [[ -z "${GREENHOUSE_API_KEY:-}" ]]; then
   exit 1
 fi
 
-BASE_URL="${GREENHOUSE_BASE_URL:-https://harvest.greenhouse.io/v1}"
-PAGE_SIZE="${GREENHOUSE_PAGE_SIZE:-25}"
-
 python3 - <<'PY'
 import json
 import os
