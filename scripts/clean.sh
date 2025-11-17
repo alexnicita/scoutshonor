@@ -18,7 +18,7 @@ targets=(
 
 for target in "${targets[@]}"; do
   if [ -e "$ROOT_DIR/$target" ]; then
-    rm -rf "$ROOT_DIR/$target"
+    rm -rf "$ROOT_DIR/${target:?}"
   fi
 done
 

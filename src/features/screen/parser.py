@@ -37,7 +37,7 @@ class ResumeParser:
         self.skill_library = {s.lower() for s in (skill_library or default_skills)}
 
     def parse(self, text: str) -> ResumeProfile:
-        lines = [l.strip() for l in text.splitlines() if l.strip()]
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
         full_name = lines[0] if lines else "Unknown"
         normalized = text.lower()
 

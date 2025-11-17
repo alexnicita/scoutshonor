@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 from .schema import IntakeForm, ScorecardCompetency
 from .generate import _output_dir
