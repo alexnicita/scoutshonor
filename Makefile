@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help setup run test lint fmt migrate clean demo
+.PHONY: help setup run test lint fmt migrate clean demo cron
 
 help:
 	@echo "Available targets:"
@@ -29,6 +29,9 @@ fmt:
 
 migrate:
 	bash scripts/migrate.sh
+
+cron:
+	bash scripts/run_digest.sh
 
 demo:
 	bash scripts/demo-e2e.sh

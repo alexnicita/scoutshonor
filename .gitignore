@@ -12,6 +12,7 @@ __pycache__/
 .coverage
 .mypy_cache/
 .venv/
+.cache/
 .ruff_cache/
 dist/
 build/

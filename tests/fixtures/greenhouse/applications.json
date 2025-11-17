@@ -1,0 +1,26 @@
+[
+  {
+    "candidate_id": 11,
+    "id": 21,
+    "jobs": [
+      {
+        "id": 1
+      }
+    ],
+    "source": {
+      "public_name": "Inbound"
+    },
+    "stage": {
+      "name": "Phone Screen"
+    }
+  },
+  {
+    "candidate_id": 12,
+    "id": 22,
+    "job_id": 3,
+    "source": {
+      "name": "Referral"
+    },
+    "stage": "Hired"
+  }
+]
