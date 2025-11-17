@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PY=${PY:-python3}
-
-$PY -m venv .venv
-source .venv/bin/activate
-pip install -U pip
-pip install -r requirements.txt
-echo "Environment ready. Activate with: source .venv/bin/activate"
-
+ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+exec bash "$ROOT_DIR/scripts/setup.sh" "$@"

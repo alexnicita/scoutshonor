@@ -12,7 +12,11 @@ __pycache__/
 .coverage
 .mypy_cache/
 .venv/
+.ruff_cache/
+dist/
+build/
+htmlcov/
 
 # Env files
 .env
-
+.env.local
