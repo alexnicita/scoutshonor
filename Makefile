@@ -1,6 +1,6 @@
 # Simple, language-lean Makefile with script wrappers
 
-.PHONY: help setup run test lint fmt
+.PHONY: help setup run test lint fmt migrate
 
 help:
 	@echo "Available targets:"
@@ -9,6 +9,7 @@ help:
 	@echo "  make test   - run the test suite"
 	@echo "  make lint   - basic lint/sanity checks"
 	@echo "  make fmt    - format the codebase (noop if none)"
+	@echo "  make migrate - apply database migrations"
 
 setup:
 	bash scripts/setup-env.sh
@@ -29,6 +30,10 @@ lint:
 
 fmt:
 	bash scripts/format.sh
+
+.PHONY: migrate
+migrate:
+	bash scripts/migrate.sh
 
 .PHONY: demo
 demo:
