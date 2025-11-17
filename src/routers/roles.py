@@ -1,6 +1,8 @@
 """Roles CRUD endpoints."""
 
-from typing import List
+from __future__ import annotations
+
+from typing import List, Optional
 from fastapi import APIRouter, HTTPException
 
 from ..services.repositories import repo
@@ -19,7 +21,7 @@ def create_role(payload: RoleCreate) -> Role:
 
 
 @router.get("/", response_model=List[Role])
-def list_roles(startup_id: str | None = None) -> List[Role]:
+def list_roles(startup_id: Optional[str] = None) -> List[Role]:
     return repo.list_roles(startup_id)
 
 

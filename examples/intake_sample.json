@@ -1,0 +1,93 @@
+{
+  "role_id": "eng-lead-001",
+  "role_title": "Head of Platform Engineering",
+  "seniority": "vp",
+  "startup_name": "Atlas Robotics",
+  "mission": "Build resilient autonomy infrastructure for industrial robotics clients.",
+  "goals": [
+    "Stabilize the platform so customers can onboard without SRE help",
+    "Build the first observability stack to unblock feature teams"
+  ],
+  "must_have_skills": [
+    "distributed systems",
+    "python",
+    "aws",
+    "incident management"
+  ],
+  "nice_to_have_skills": [
+    "kubernetes",
+    "sre",
+    "hardware integration"
+  ],
+  "responsibilities": [
+    "Own platform roadmap and delivery",
+    "Establish on-call and incident review cadence",
+    "Coach senior engineers on reliability and architecture"
+  ],
+  "location": "San Francisco",
+  "remote_ok": true,
+  "compensation_range": "$220k-$260k base + equity",
+  "success_metrics": [
+    "Reduce Sev-1s by 50% in two quarters",
+    "Hire 2 platform engineers with diverse backgrounds",
+    "Deliver customer uptime SLA of 99.9%"
+  ],
+  "interview_panel": [
+    "CTO",
+    "Product Lead",
+    "Advisor (SRE)"
+  ],
+  "hiring_manager": {
+    "name": "Jordan Lee",
+    "email": "jordan@atlas.com",
+    "department": "Engineering"
+  },
+  "scorecard": [
+    {
+      "name": "Technical leadership",
+      "weight": 0.35,
+      "signals": [
+        "Managed senior ICs",
+        "Shipped platform or infrastructure projects",
+        "Improved reliability metrics"
+      ],
+      "knockout_questions": [
+        "Describe the last major incident you led and the outcome."
+      ]
+    },
+    {
+      "name": "Systems depth",
+      "weight": 0.3,
+      "signals": [
+        "Understands distributed systems trade-offs",
+        "Comfort with Python services and AWS primitives"
+      ],
+      "knockout_questions": [
+        "How would you debug a latency spike across services?"
+      ]
+    },
+    {
+      "name": "Team building",
+      "weight": 0.2,
+      "signals": [
+        "Hired platform/SRE engineers",
+        "Built on-call rotations",
+        "Creates psychologically safe teams"
+      ],
+      "knockout_questions": [
+        "How do you onboard senior hires into a new stack?"
+      ]
+    },
+    {
+      "name": "Stakeholder partnership",
+      "weight": 0.15,
+      "signals": [
+        "Partnered with product to set SLAs",
+        "Communicates trade-offs to go-to-market teams"
+      ],
+      "knockout_questions": [
+        "How do you align incident comms with customers?"
+      ]
+    }
+  ]
+}
