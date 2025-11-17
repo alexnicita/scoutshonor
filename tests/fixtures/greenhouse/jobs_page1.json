@@ -1,0 +1,37 @@
+[
+  {
+    "departments": [
+      {
+        "id": 5,
+        "name": "Engineering"
+      }
+    ],
+    "id": 1,
+    "name": "Backend Engineer",
+    "offices": [
+      {
+        "id": 10,
+        "name": "Remote"
+      }
+    ],
+    "openings": [
+      {
+        "id": 101
+      }
+    ],
+    "status": "open"
+  },
+  {
+    "departments": [
+      {
+        "id": 6,
+        "name": "Product"
+      }
+    ],
+    "id": 2,
+    "name": "Product Manager",
+    "offices": [],
+    "openings": [],
+    "status": "draft"
+  }
+]

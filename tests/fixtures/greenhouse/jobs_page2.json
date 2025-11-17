@@ -1,0 +1,20 @@
+[
+  {
+    "departments": [
+      {
+        "id": 7,
+        "name": "Data"
+      }
+    ],
+    "id": 3,
+    "name": "Data Analyst",
+    "offices": [
+      {
+        "id": 11,
+        "name": "San Francisco"
+      }
+    ],
+    "openings": [],
+    "status": "open"
+  }
+]

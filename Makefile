@@ -30,6 +30,10 @@ lint:
 fmt:
 	bash scripts/format.sh
 
+.PHONY: cron
+cron:
+	bash scripts/run_digest.sh
+
 .PHONY: demo
 demo:
 	bash scripts/demo-e2e.sh

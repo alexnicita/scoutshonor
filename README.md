@@ -10,6 +10,8 @@ Minimal, usable FastAPI service with Make targets, scripts, and tests.
 - `make lint` — basic sanity checks (syntax compile)
 - `make fmt` — format if a formatter is installed
 - `bash scripts/demo-e2e.sh` — run an end-to-end recruiter demo locally
+- `bash scripts/gh_fetch_sample.sh` — fetch a small Greenhouse sample (needs `GREENHOUSE_API_KEY`)
+- `bash scripts/run_digest.sh` — generate the daily digest and optionally post to Slack
 
 ## Layout
 
@@ -23,6 +25,10 @@ Minimal, usable FastAPI service with Make targets, scripts, and tests.
 
 - Never commit secrets. Use `.env` locally. See `.env.example`.
 - Dependencies are kept minimal; pin versions in `requirements.txt` if added.
+- Integrations:
+  - Greenhouse/Lever: set `GREENHOUSE_API_KEY` / `LEVER_API_KEY`.
+  - Gmail: follow `docs/gmail_setup.md`; tokens live in `.cache/`.
+  - Slack: configure bot token and slash commands via `docs/slack_app.yaml`.
 
 ## Development
 

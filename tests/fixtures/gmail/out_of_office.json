@@ -1,0 +1,25 @@
+{
+  "id": "ooo-1",
+  "threadId": "thread-2",
+  "snippet": "I'm out of office until next week.",
+  "payload": {
+    "headers": [
+      {
+        "name": "From",
+        "value": "ooo@example.com"
+      },
+      {
+        "name": "To",
+        "value": "recruiter@example.com"
+      },
+      {
+        "name": "Subject",
+        "value": "Out of Office: Backend role"
+      },
+      {
+        "name": "Auto-Submitted",
+        "value": "auto-replied"
+      }
+    ]
+  }
+}

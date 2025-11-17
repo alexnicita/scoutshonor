@@ -1,0 +1,25 @@
+{
+  "id": "reply-1",
+  "threadId": "thread-3",
+  "snippet": "Thanks for reaching out!",
+  "payload": {
+    "headers": [
+      {
+        "name": "From",
+        "value": "candidate@example.com"
+      },
+      {
+        "name": "To",
+        "value": "recruiter@example.com"
+      },
+      {
+        "name": "Subject",
+        "value": "Re: Backend role"
+      },
+      {
+        "name": "In-Reply-To",
+        "value": "<orig@company.com>"
+      }
+    ]
+  }
+}

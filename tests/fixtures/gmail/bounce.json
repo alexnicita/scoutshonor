@@ -1,0 +1,21 @@
+{
+  "id": "bounce-1",
+  "threadId": "thread-1",
+  "snippet": "Delivery has failed to these recipients or groups.",
+  "payload": {
+    "headers": [
+      {
+        "name": "From",
+        "value": "Mailer-Daemon <mailer-daemon@googlemail.com>"
+      },
+      {
+        "name": "To",
+        "value": "sender@example.com"
+      },
+      {
+        "name": "Subject",
+        "value": "Delivery Status Notification (Failure)"
+      }
+    ]
+  }
+}
