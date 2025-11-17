@@ -35,6 +35,40 @@ class InMemoryRepo:
             return list(self.candidates.values())
         return [c for c in self.candidates.values() if c.id in set(ids)]
 
+    def search_candidates(
+        self,
+        skills: Optional[List[str]] = None,
+        titles: Optional[List[str]] = None,
+        domains: Optional[List[str]] = None,
+        location: Optional[str] = None,
+    ) -> List[Candidate]:
+        skills_s = {s.strip().lower() for s in (skills or []) if s}
+        titles_s = {t.strip().lower() for t in (titles or []) if t}
+        domains_s = {d.strip().lower() for d in (domains or []) if d}
+        loc = (location or "").strip().lower()
+
+        def matches(c: Candidate) -> bool:
+            if skills_s:
+                cand_sk = {s.strip().lower() for s in c.skills}
+                if not skills_s.issubset(cand_sk):
+                    return False
+            if titles_s:
+                cand_titles = [*(c.titles or []), c.current_title or ""]
+                cand_titles_s = {t.strip().lower() for t in cand_titles if t}
+                if not (titles_s & cand_titles_s):
+                    return False
+            if domains_s:
+                cand_domains = {d.strip().lower() for d in c.domains}
+                if not (domains_s & cand_domains):
+                    return False
+            if loc:
+                cand_locs = {l.strip().lower() for l in c.locations}
+                if loc not in cand_locs:
+                    return False
+            return True
+
+        return [c for c in self.candidates.values() if matches(c)]
+
     # Startup ops
     def create_startup(self, payload: StartupCreate) -> Startup:
         sid = str(uuid4())

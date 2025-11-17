@@ -1,28 +1,35 @@
-# Makefile for AI Tech Exec Recruiter
+# Simple, language-lean Makefile with script wrappers
 
-PY ?= python3
-PIP ?= pip3
-VENV ?= .venv
-ACTIVATE = . $(VENV)/bin/activate
+.PHONY: help setup run test lint fmt
 
-.PHONY: setup run test lint fmt clean
+help:
+	@echo "Available targets:"
+	@echo "  make setup  - install deps / init env"
+	@echo "  make run    - run the primary app"
+	@echo "  make test   - run the test suite"
+	@echo "  make lint   - basic lint/sanity checks"
+	@echo "  make fmt    - format the codebase (noop if none)"
 
 setup:
-	$(PY) -m venv $(VENV)
-	$(ACTIVATE) && pip install -U pip
-	$(ACTIVATE) && pip install -r requirements.txt
+	bash scripts/setup-env.sh
 
 run:
-	$(ACTIVATE) && uvicorn src.app:app --reload --port $${PORT:-8000}
+	bash scripts/run-server.sh
 
 test:
-	PYTHONPATH=. $(ACTIVATE) && pytest -q
+	bash scripts/run-tests.sh
 
 lint:
-	$(ACTIVATE) && ruff check src tests $(FIX)
+	@if command -v ruff >/dev/null 2>&1; then \
+		ruff check src tests; \
+	else \
+		echo "ruff not found; running basic syntax check"; \
+		python3 -m py_compile $(find src -name "*.py"); \
+	fi
 
 fmt:
-	$(ACTIVATE) && black src tests scripts
+	bash scripts/format.sh
 
-clean:
-	rm -rf $(VENV) .pytest_cache .ruff_cache **/__pycache__ */**/__pycache__
+.PHONY: demo
+demo:
+	bash scripts/demo-e2e.sh
