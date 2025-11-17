@@ -62,6 +62,7 @@ ALICE=$(curl -fsS -X POST "$BASE_URL/candidates/" -H 'Content-Type: application/
   "locations": ["San Francisco"],
   "remote_preference": true
 }')
+# shellcheck disable=SC2034
 ALICE_ID=$(echo "$ALICE" | jq -r .id)
 
 BOB=$(curl -fsS -X POST "$BASE_URL/candidates/" -H 'Content-Type: application/json' -d '{
@@ -74,6 +75,7 @@ BOB=$(curl -fsS -X POST "$BASE_URL/candidates/" -H 'Content-Type: application/js
   "locations": ["New York"],
   "remote_preference": true
 }')
+# shellcheck disable=SC2034
 BOB_ID=$(echo "$BOB" | jq -r .id)
 
 echo "Running match (top 1) ..."
@@ -90,4 +92,3 @@ OUTREACH=$(curl -fsS -X POST "$BASE_URL/outreach" -H 'Content-Type: application/
 echo "$OUTREACH" | jq .
 
 echo "Done. Use the generated subject/body to reach out."
-

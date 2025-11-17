@@ -4,16 +4,18 @@ Minimal, usable FastAPI service with Make targets, scripts, and tests.
 
 ## Quickstart
 
-- `make setup` — initialize env (creates `.venv` if Python is present)
-- `make run` — start the API server on `:8000`
-- `make test` — run tests (pytest if available)
-- `make lint` — basic sanity checks (syntax compile)
-- `make fmt` — format if a formatter is installed
+- `cp .env.example .env` — start from safe defaults (keep `.env` out of git)
+- `make setup` — create `.venv` and install requirements (best-effort offline)
+- `make run` — start the API server (defaults to `0.0.0.0:8000`)
+- `make test` — run tests (pytest if available; unittest fallback)
+- `make lint` / `make fmt` — lightweight lint/format helpers
+- `make clean` — remove caches and build artifacts
 - `bash scripts/demo-e2e.sh` — run an end-to-end recruiter demo locally
 
 ## Layout
 
 - `src/` — production code (`src/app.py` creates the FastAPI app)
+- `src/obs/logging.py` — structured logging stub for future observability
 - `tests/` — unit tests mirroring `src/`
 - `scripts/` — command wrappers used by `Makefile`
 - `docs/` and `assets/` — placeholders for docs/static files
@@ -26,6 +28,14 @@ Minimal, usable FastAPI service with Make targets, scripts, and tests.
 
 ## Development
 
+- Tooling entrypoints:
+  - `make setup` → `scripts/setup.sh`
+  - `make run` → `scripts/run.sh` (uvicorn if present; falls back to python)
+  - `make test` → `scripts/test.sh` (pytest or unittest)
+  - `make lint` → `scripts/lint.sh` (ruff/syntax + optional shellcheck)
+  - `make fmt` → `scripts/fmt.sh` (ruff format/black/autopep8)
+  - `make clean` → `scripts/clean.sh`
+- Copy `.env.example` to `.env` for local overrides; `.env` is gitignored.
 - Code style: 4 spaces for Python, snake_case filenames under `src/` and `tests/`.
 - Prefer small, pure functions with clear responsibilities.
 

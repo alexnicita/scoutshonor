@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source .venv/bin/activate
-exec uvicorn src.app:app --reload --port ${PORT:-8000}
-
+ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+exec bash "$ROOT_DIR/scripts/run.sh" "$@"
