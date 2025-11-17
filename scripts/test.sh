@@ -11,7 +11,17 @@ fi
 
 if command -v pytest >/dev/null 2>&1; then
   echo "[test] running pytest"
-  exec pytest -q
+  # Use coverage if pytest-cov is available
+  if python - <<'PY'
+import importlib.util
+import sys
+sys.exit(0 if importlib.util.find_spec('pytest_cov') else 1)
+PY
+  then
+    exec pytest -q --cov=src --cov-report=term-missing
+  else
+    exec pytest -q
+  fi
 fi
 
 if command -v python3 >/dev/null 2>&1; then

@@ -9,3 +9,5 @@ We take the security of this project seriously. Please follow these guidelines:
 - Avoid writing sensitive data to the repo. Runtime data should live under `data/`, which is gitignored by default.
 
 If you are unsure whether something constitutes a security issue, err on the side of reporting privately.
+
+Security contact: alex@nicita.cc

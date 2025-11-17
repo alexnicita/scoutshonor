@@ -1,5 +1,7 @@
 # scoutshonor ai recruiting engine
 
+Status: Alpha — APIs and data models may change.
+
 Welcome to Camp Scoutshonor, where we earn merit badges for shipping, not tying knots in production. Our motto: Be Prepared… to hire faster.
 
 ## Why This Exists (Purpose)
@@ -72,5 +74,11 @@ See `examples/recruiter_flow.md` for a step-by-step cURL journey, `examples/sour
 - Use Conventional Commits (e.g., `feat: add parser`).
 - Keep commits focused; include rationale when non-obvious.
 - Open a draft PR early for architectural changes; ask for review before you bushwhack.
+
+See CONTRIBUTING.md for setup and workflow, and CODE_OF_CONDUCT.md for community standards. Security guidance is in SECURITY.md.
+
+## License
+
+Licensed under the MIT License — see LICENSE for details.
 
 Merit badge ideas welcome. Bring snacks, not secrets.
