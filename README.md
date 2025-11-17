@@ -1,10 +1,8 @@
-# scoutshonor ai recruiting engine
+# ai-powered recruiting engine
 
-Status: Alpha — APIs and data models may change.
+Welcome to Camp Scoutshonor!
 
-Welcome to Camp Scoutshonor, where we earn merit badges for shipping, not tying knots in production. Our motto: Be Prepared… to hire faster.
-
-## Why This Exists (Purpose)
+## Purpose
 
 - Bold mission: AI-powered recruiting engine that helps small teams do big things — source smarter, match candidates to roles, and send outreach that doesn’t sound like it was whittled by a robot.
 - What it does: Ingests roles and candidates, ranks fit, drafts outreach and job descriptions, and generates Boolean/X-Ray strings for sourcing.
